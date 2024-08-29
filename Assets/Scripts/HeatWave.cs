@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class HeatWave : MonoBehaviour
@@ -29,13 +30,9 @@ public class HeatWave : MonoBehaviour
 
         sr.color = day;
     }
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
-    void Update()
+    private async UniTaskVoid UpdateUniTask()
     {
         currentTime += Time.deltaTime;
         if (currentTime >= oneDay)
@@ -49,27 +46,26 @@ public class HeatWave : MonoBehaviour
             {
                 // day -> night
                 isSwap = true;
-                StartCoroutine(SwapColor(sr.color, night));
+                await(SwapColor(sr.color, night));
             }
             else if (Mathf.FloorToInt(oneDay * 0.9f) == Mathf.FloorToInt(currentTime))
             {
                 // night -> day
                 isSwap = true;
-                StartCoroutine(SwapColor(sr.color, day));
+                await(SwapColor(sr.color, day));
             }
         }
     }
 
-    IEnumerator SwapColor(Color start, Color end)
+    public async UniTask SwapColor(Color start, Color end)
     {
         float t = 0;
         while (t < 1)
         {
             t += Time.deltaTime * (1 / (transitionTime * oneDay));
             sr.color = Color.Lerp(start, end, t);
-            yield return null;
+            await UniTask.Yield();
         }
-        Time.timeScale = 0.75f;
         isSwap = false;
     }
 }
