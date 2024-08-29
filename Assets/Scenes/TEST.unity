@@ -287,6 +287,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MonsterObj_Red: {fileID: 4629484045424468158, guid: 34b40441ea26d9244b09a16a87c1a627, type: 3}
   _MonsterObj_Blue: {fileID: 4629484045424468158, guid: 58e8df15078834c4f9aff7fad108c994, type: 3}
+--- !u!1 &773426994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 773426996}
+  - component: {fileID: 773426995}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &773426995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773426994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df671e1724897e246b2544910ff8cb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SpawnerUP: {fileID: 409461424}
+  _SpawnerDOWN: {fileID: 2002742534}
+  startTime: 0
+  currentTime: 0
+--- !u!4 &773426996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773426994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.39942133, y: 0.25886977, z: 0.06957713}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002742532
 GameObject:
   m_ObjectHideFlags: 0
