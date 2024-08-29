@@ -19,6 +19,12 @@ public class Dialog : MonoBehaviour
     
     void Update()
     {
+        getPanel();
+        getCharacter();
+    }
+
+    void getPanel()
+    {
         if (IsCheck == true)
         {
             text.text = "TEST";
@@ -29,7 +35,11 @@ public class Dialog : MonoBehaviour
             IsCheck = false;
             talkPanel.SetActive(false);
         }
-        if(Character == 0)
+    }
+
+    void getCharacter()
+    {
+        if (Character == 0)
         {
             //img.GetComponent<Image>().sprite = Resources.Load("[이미지경로]", typeof(Sprite)) as Sprite;
         }

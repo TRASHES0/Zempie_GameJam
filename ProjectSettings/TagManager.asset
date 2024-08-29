@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Note
+  - PerfectRect
+  - GreatRect
+  - GoodRect
+  - BadRect
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,44 +6,35 @@ using UnityEngine;
 
 public class TimingManager : MonoBehaviour
 {
-    public List<GameObject> boxNoteList = new List<GameObject>();
-
-    [SerializeField] Transform Center = null;
-    [SerializeField] RectTransform[]  timingRect = null;
-    Vector2[] timingBoxs = null;
+    private GameObject Note = null;
+    private string state;
+    private bool isTriggered = false;
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        isTriggered = true;
+        Note = other.GameObject();
+       //Debug.Log(state);
+    }
     
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        timingBoxs = new Vector2[timingRect.Length];
-        for (int i = 0; i < timingRect.Length; i++)
-        {
-            timingBoxs[i].Set(Center.localPosition.x - timingRect[i].rect.width/2,
-                Center.localPosition.x + timingRect[i].rect.width/2);
-        }
+        isTriggered = false;
+        Note = null;
+        //Debug.Log(state);
     }
 
-    public void CheckTiming()
-    {
-        for (int i = 0; i < boxNoteList.Count; i++)
-        {
-            float t_notePosX = boxNoteList[i].transform.localPosition.x;
-            for (int x = 0; x < timingBoxs.Length; x++)
-            {
-                if (t_notePosX >= timingBoxs[x].x && t_notePosX <= timingBoxs[x].y)
-                {
-                    Debug.Log("hit" + x);
-                    return;
-                }
-            }
-        }
-        
-        Debug.Log("miss");
-        return;
-    }
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Note == null)
+        {
+            
+        }
+        else if (Note.CompareTag("Note") && Input.GetKeyDown(KeyCode.Space))
+        {
+            state = Note.GetComponent<EnemyMovement>().state;
+            Destroy(Note);
+            Note = null;
+            Debug.Log("Score :" + state);
+        }
     }
 }
