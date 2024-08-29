@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHit : MonoBehaviour
+public class Hit : MonoBehaviour
 {
 
     [SerializeField]
@@ -16,21 +16,7 @@ public class EnemyHit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Obstacle"))
-        {
-            p_anim.SetTrigger("Hit");
-            a_anim.SetTrigger("Hit");
-
-            cm.HitReaction();
-        }
-        else if(collision.CompareTag("FallObstacle"))
-        {
-            p_anim.SetTrigger("Hit");
-            a_anim.SetTrigger("Hit");
-            collision.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
-            FallPlatform();
-        }
-        else if(collision.CompareTag("Note"))
+        if(collision.CompareTag("Note"))
         {
             p_anim.SetTrigger("Hit");
             a_anim.SetTrigger("Hit");
