@@ -11,8 +11,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public Vector2 _targetpos;
     private Sequence _sequence;
-    public TimingManager timingManager;
-
+   
     public string state = "Miss";
     private enum Types{
         Red,
