@@ -3,39 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mail;
 using UnityEngine;
-using DG.Tweening;
 using Unity.VisualScripting;
-using Sequence = DG.Tweening.Sequence;
+
 
 public class CharacterMovement : MonoBehaviour
 {
-    
+    private bool isJumping = false;
 
-    private float waittime = 0.3f;
+    private Rigidbody2D rid;
     // Start is called before the first frame update
     void Start()
     {
-       
+        rid = GetComponent<Rigidbody2D>();
     }
 
     void OnJumpStart()
     {
-        transform.DOMoveY(2.3f, waittime);
-        Invoke("OnJumpEnd", waittime);
+        rid.AddForce(new Vector2(0,13),ForceMode2D.Impulse);
+        
     }
 
-    void OnJumpEnd()
+    void OnTriggerEnter2D(Collider2D other)
     {
-      
-        transform.DOMoveY(-2f,waittime);
-     
+        if (other.CompareTag("Floor"))
+        {
+            isJumping = false;
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !isJumping)
         {
+            isJumping = true;
             OnJumpStart();
         }
+        Debug.Log(isJumping);
     }
 }
