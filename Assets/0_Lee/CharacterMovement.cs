@@ -90,6 +90,8 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (_enemiesinCollider[0].enemyType == EnemyTypes.RED)
                         Debug.Log(_enemiesinCollider[0].state);
+                    else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
+                        Debug.Log(_enemiesinCollider[0].state);
                     else
                         Debug.Log("Wrong One!");
                     Destroy(_enemiesinCollider[0].gameObject);
@@ -98,9 +100,14 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (_enemiesinCollider[0].enemyType == EnemyTypes.BLUE)
                         Debug.Log(_enemiesinCollider[0].state);
+                    else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
+                        Debug.Log(_enemiesinCollider[0].state);
                     else
                         Debug.Log("Wrong One!");
+
+
                     Destroy(_enemiesinCollider[0].gameObject);
+
                 }
             }
         }

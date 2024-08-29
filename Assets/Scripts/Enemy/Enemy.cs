@@ -16,7 +16,8 @@ public class Enemy : MonoBehaviour
     void Start(){
         _spriteRenderer.sprite = sprite;
 
-        transform.DOMoveX(CharX - 10f, spawnSpeed).SetEase(Ease.Linear).SetLink(gameObject);
+        if(enemyType != EnemyTypes.TRASH)
+            transform.DOMoveX(CharX - 10f, spawnSpeed).SetEase(Ease.Linear).SetLink(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
