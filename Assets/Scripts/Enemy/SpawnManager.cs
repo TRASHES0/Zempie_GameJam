@@ -40,8 +40,16 @@ public class SpawnManager : MonoBehaviour
             Destroy(Instantiate(_enemyT, _spawnerDOWN.position, _spawnerDOWN.rotation).gameObject, 1f);
         }
         
-        if(enemyType == EnemyTypes.RED) _enemy.sprite = _sprites[0];
-        else if(enemyType == EnemyTypes.BLUE) _enemy.sprite = _sprites[1];
+        if(enemyType == EnemyTypes.RED)
+        {
+            _enemy.sprite = _sprites[0];
+            SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.EnemyRedNode);
+        }
+        else if(enemyType == EnemyTypes.BLUE)
+        {
+            SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.EnemyBlueNode);
+            _enemy.sprite = _sprites[1];
+        }
         else if(enemyType == EnemyTypes.TRASH) _enemy.sprite = _sprites[2];
         _enemy.enemyType = enemyType;
         _enemy.spawnTime = spawnTime;
