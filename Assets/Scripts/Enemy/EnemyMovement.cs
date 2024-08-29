@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public Vector2 _targetpos;
     private Sequence _sequence;
-    
+    public TimingManager timingManager;
     private enum Types{
         Red,
         Blue
@@ -16,6 +16,8 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timingManager = GetComponent<TimingManager>();
+        //timingManager.boxNoteList.Add(this.gameObject);
         _sequence = DOTween.Sequence();
 
         //DOTween.Init(bool recycle, bool useSafeMode, LogBehaviour logBehaviour, SetCapacity setCapacity)
@@ -34,6 +36,6 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 }
