@@ -12,7 +12,9 @@ public class NextImage : MonoBehaviour
 
     public void NextImg()
     {
-        if (i == image.Length)
+        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Button);
+
+        if (i == image.Length - 1)
         {
             if (SceneManager.GetActiveScene().name == "InroScene")
             {
@@ -21,8 +23,10 @@ public class NextImage : MonoBehaviour
             else
                 Application.Quit();
         }
-        //SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Button);
-        image[i].SetActive(true);
-        i++;
+        else
+        {
+            image[i].SetActive(true);
+            i++;
+        }
     }
 }
