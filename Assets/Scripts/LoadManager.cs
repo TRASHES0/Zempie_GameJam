@@ -12,7 +12,7 @@ public class LoadManager : MonoBehaviour
         SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Button);
 
         if (SceneManager.GetActiveScene().name == "StartScene")
-            SceneManager.LoadScene("IntroScene");
+            SceneManager.LoadScene("InroScene");
         else if (SceneManager.GetActiveScene().name == "Tutorial")
             SceneManager.LoadScene("Sun_GameScene");
     }
