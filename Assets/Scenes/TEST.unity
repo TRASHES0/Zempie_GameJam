@@ -464,6 +464,7 @@ MonoBehaviour:
   _sprites:
   - {fileID: -9095717837082945937, guid: 75ef200772b9a8244a08fec846fc8017, type: 3}
   - {fileID: -9095717837082945937, guid: 7080869e505d3ea4f887f0793f2a9b5e, type: 3}
+  - {fileID: -9095717837082945937, guid: 0e1fe4a9186671e42bc91db3c02a4778, type: 3}
   enemyData: {fileID: 0}
 --- !u!4 &773426996
 Transform:

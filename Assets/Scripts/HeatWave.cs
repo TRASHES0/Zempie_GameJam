@@ -29,10 +29,12 @@ public class HeatWave : MonoBehaviour
         transform.localScale = new Vector2(Mathf.Ceil(screenX / spritex), Mathf.Ceil(screenY / spritey));
 
         sr.color = day;
+
+        UpdateUniTask().Forget();
     }
 
     // Update is called once per frame
-    private async UniTaskVoid UpdateUniTask()
+    private async UniTask UpdateUniTask()
     {
         currentTime += Time.deltaTime;
         if (currentTime >= oneDay)
@@ -46,13 +48,13 @@ public class HeatWave : MonoBehaviour
             {
                 // day -> night
                 isSwap = true;
-                await(SwapColor(sr.color, night));
+                SwapColor(sr.color, night).Forget();
             }
             else if (Mathf.FloorToInt(oneDay * 0.9f) == Mathf.FloorToInt(currentTime))
             {
                 // night -> day
                 isSwap = true;
-                await(SwapColor(sr.color, day));
+                SwapColor(sr.color, day).Forget();
             }
         }
     }
