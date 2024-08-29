@@ -250,7 +250,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 409461423}
-  - component: {fileID: 409461424}
   m_Layer: 0
   m_Name: SpawnerUP
   m_TagString: Untagged
@@ -266,27 +265,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409461421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.5, y: 6, z: 0}
+  m_LocalPosition: {x: 12, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &409461424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409461421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ea02a48dd7ef904c98d6272a68813fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _MonsterObj_Red: {fileID: 4629484045424468158, guid: 34b40441ea26d9244b09a16a87c1a627, type: 3}
-  _MonsterObj_Blue: {fileID: 4629484045424468158, guid: 58e8df15078834c4f9aff7fad108c994, type: 3}
 --- !u!1 &773426994
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,10 +301,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df671e1724897e246b2544910ff8cb41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _SpawnerUP: {fileID: 409461424}
-  _SpawnerDOWN: {fileID: 2002742534}
-  startTime: 0
+  _enemyObj: {fileID: 1968237672796305314, guid: 3b13e6b98b4eab04b9e6f6e359a764cb, type: 3}
+  _spawnerUP: {fileID: 409461423}
+  _spawnerDOWN: {fileID: 2002742533}
+  _char: {fileID: 1882586424}
   currentTime: 0
+  enemyData: {fileID: 0}
 --- !u!4 &773426996
 Transform:
   m_ObjectHideFlags: 0
@@ -333,7 +320,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1362446139
 GameObject:
@@ -364,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde31375178a889428941f712372aec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnManager: {fileID: 773426995}
   enemySpawnData: {fileID: 11400000, guid: dae881d5a41a1ec4c8aeeb7327228a38, type: 2}
 --- !u!4 &1362446141
 Transform:
@@ -378,7 +366,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1882586423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1882586424}
+  m_Layer: 0
+  m_Name: Char
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1882586424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882586423}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002742532
 GameObject:
@@ -389,7 +408,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2002742533}
-  - component: {fileID: 2002742534}
   m_Layer: 0
   m_Name: SpawnerDown
   m_TagString: Untagged
@@ -405,24 +423,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002742532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.5, y: -6, z: 0}
+  m_LocalPosition: {x: 12, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2002742534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002742532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48d16b6982595c340b528e912063a263, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _MonsterObj_Red: {fileID: 4629484045424468158, guid: 34b40441ea26d9244b09a16a87c1a627, type: 3}
-  _MonsterObj_Blue: {fileID: 4629484045424468158, guid: 58e8df15078834c4f9aff7fad108c994, type: 3}
