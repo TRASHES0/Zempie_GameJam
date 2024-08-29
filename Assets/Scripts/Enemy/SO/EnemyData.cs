@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyTypes{ RED, BLUE }
+public enum EnemyTypes{ RED, BLUE, TRASH }
 public class EnemyData : MonoBehaviour
 {   
     [System.Serializable]
