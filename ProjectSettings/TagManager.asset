@@ -10,6 +10,8 @@ TagManager:
   - GoodRect
   - BadRect
   - Floor
+  - Obstacle
+  - FallObstacle
   layers:
   - Default
   - TransparentFX
