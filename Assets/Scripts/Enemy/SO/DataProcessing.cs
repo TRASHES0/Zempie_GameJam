@@ -6,9 +6,11 @@ using System.IO;
 
 public class DataProcessing : MonoBehaviour
 {
+    [SerializeField]
+    private SpawnManager _spawnManager;
     public EnemySpawnData enemySpawnData;
     private EnemyData _enemyData;
-    void Start(){
+    void Awake(){
         GameObject EnemySpawnDataGO = new GameObject("Spawn DB");
         EnemySpawnDataGO.transform.position = transform.position;
         EnemySpawnDataGO.transform.parent = transform;
@@ -28,5 +30,8 @@ public class DataProcessing : MonoBehaviour
 
             _enemyData.enemies.Add(tmpEnemy);
         }
+
+        _spawnManager.enemyData = _enemyData;
     }
+
 }
