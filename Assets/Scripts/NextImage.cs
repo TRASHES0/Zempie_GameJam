@@ -16,6 +16,7 @@ public class NextImage : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name == "IntroScene")
             {
+                Debug.Log("Hi");
                 SceneManager.LoadScene("Tutorial");
             }
             else
