@@ -6,7 +6,7 @@ using UnityEngine;
 using Unity.VisualScripting;
 using System.Linq;
 
-
+  
 public class CharacterMovement : MonoBehaviour
 {
     private bool isJumping = false;
