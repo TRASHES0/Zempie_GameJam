@@ -9,31 +9,15 @@ public class BSGScroll : MonoBehaviour
     public float offset;
     public float speed;
 
-    public int order;
-    public string layerName;
-    
-    void Awake()
+    void Start()
     {
         renderer = GetComponent<MeshRenderer>();
-        renderer.sortingLayerName = layerName;
-        renderer.sortingOrder = order;
     }
 
     void Update()
     {
-        if (renderer.sortingLayerName != layerName)
-            renderer.sortingLayerName = layerName;
-        if (renderer.sortingOrder != order)
-            renderer.sortingOrder = order;
-
         offset += Time.deltaTime * speed;
         renderer.material.mainTextureOffset = new Vector2(offset, 0);
     }
 
-    public void OnValidate()
-    {
-        renderer = GetComponent<MeshRenderer>();
-        renderer.sortingLayerName = layerName;
-        renderer.sortingOrder = order;
-    }
 }
