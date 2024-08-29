@@ -5,8 +5,14 @@ using DG.Tweening;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Vector2 _targetpos = new Vector2(0, 0);
+    public Vector2 _targetpos;
     private Sequence _sequence;
+    
+    private enum Types{
+        Red,
+        Blue
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +28,6 @@ public class EnemyMovement : MonoBehaviour
 
         _sequence.Append(transform.DOMoveY(_targetpos.y, 2f).SetEase(Ease.OutQuad))
         .Join(transform.DOMoveX(_targetpos.x, 2f).SetEase(Ease.InQuad));
-
 
     }
 
