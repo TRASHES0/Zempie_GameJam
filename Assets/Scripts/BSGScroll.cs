@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class BSGScroll : MonoBehaviour
 {
-    public MeshRenderer renderer;
+    public SpriteRenderer renderer;
 
     public float offset;
     public float speed;
 
     void Start()
     {
-        renderer = GetComponent<MeshRenderer>();
+        renderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()

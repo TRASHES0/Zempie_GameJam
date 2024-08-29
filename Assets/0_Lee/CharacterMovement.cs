@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
 {
     private bool isJumping = false;
     private bool isSliding = false;
+    private Animator _anim;
 
     public float jumpPower = 20;
 
@@ -18,15 +19,20 @@ public class CharacterMovement : MonoBehaviour
 
     public Collider2D Running;
     public Collider2D Sliding;
+    [SerializeField]
+    private BoxCollider2D _groundCheck;
     
     public List<Enemy> _enemiesinCollider;
+
     // Start is called before the first frame update
     void Start()
     {
         Running.enabled = true;
         Sliding.enabled = false;
         _enemiesinCollider = new List<Enemy>();
-        rigid = GetComponent<Rigidbody2D>();
+        TryGetComponent(out rigid);
+        TryGetComponent(out _anim);
+        //TryGetComponent(out _groundCheck);
     }
     
     void Update()
@@ -34,8 +40,10 @@ public class CharacterMovement : MonoBehaviour
         //Jump
         if (Input.GetKeyDown(KeyCode.Q) && !isJumping)
         {
+            Running.enabled = true;
+            Sliding.enabled = false;
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            //anim.SetBool("isjumping", true);
+            _anim.SetBool("IsJump", true);
             isJumping = true;
         }
 
@@ -79,16 +87,16 @@ public class CharacterMovement : MonoBehaviour
         //Landing Ploatform
         if(rigid.velocity.y < 0) //내려갈떄만 스캔
         {
-            Debug.Log("falling");
-            Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
-            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 15, LayerMask.GetMask("Platform"));
+            //Debug.Log("falling");
+            Debug.DrawRay(_groundCheck.transform.position, Vector3.down, new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(_groundCheck.transform.position, Vector3.down, 1f, LayerMask.GetMask("Platform"));
             Debug.Log(rayHit.collider);
             if (rayHit.collider != null)
             {
                 if (rayHit.distance < 1.5)
                 {
                     isJumping = false;
-                    //anim.SetBool("isjumping", false);
+                    _anim.SetBool("IsJump", false);
                 }
             }
         }
