@@ -31,7 +31,7 @@ public class MonsterSpawnManagerDown : MonoBehaviour
             }
         else if(type == Types.Blue)
             for(int i = 0; i < spawn_num; ++i){
-                Instantiate(_MonsterObj_Blue, transform.position, transform.rotation).GetComponent<EnemyMovement>()._targetpos = new Vector2(-100f, -3f);
+                Instantiate(_MonsterObj_Blue, transform.position, transform.rotation).GetComponent<EnemyMovement>()._targetpos = new Vector2(0f, -3f);
                 await UniTask.Delay(delay_time);
             }
     }

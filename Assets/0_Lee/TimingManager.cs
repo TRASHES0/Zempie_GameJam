@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,6 +11,7 @@ public class TimingManager : MonoBehaviour
     [SerializeField] Transform Center = null;
     [SerializeField] Collider2D[]  timingRect = null;
     Vector2[] timingBoxs = null;
+    private string state;
     
     // Start is called before the first frame update
     void Start()
@@ -22,5 +24,19 @@ public class TimingManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void CheckTiming()
+    {
+        for (int i = 0; i < timingRect.Length; i++)
+        {
+            
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+       state = other.GetComponent<EnemyMovement>().state;
+       Debug.Log(state);
     }
 }

@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetpos: {x: 0, y: 0}
+  timingManager: {fileID: 0}
+  state: Miss
 --- !u!70 &4395097787605371332
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -114,7 +116,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.56, y: 5.12}
+  m_Size: {x: 0.1, y: 5.12}
   m_Direction: 0
 --- !u!50 &8357587619662196466
 Rigidbody2D:
