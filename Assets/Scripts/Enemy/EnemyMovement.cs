@@ -16,8 +16,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timingManager = GetComponent<TimingManager>();
-        //timingManager.boxNoteList.Add(this.gameObject);
+        
         _sequence = DOTween.Sequence();
 
         //DOTween.Init(bool recycle, bool useSafeMode, LogBehaviour logBehaviour, SetCapacity setCapacity)
