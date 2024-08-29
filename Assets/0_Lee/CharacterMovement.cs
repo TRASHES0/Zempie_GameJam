@@ -50,12 +50,12 @@ public class CharacterMovement : MonoBehaviour
         if(rigid.velocity.y < 0) //내려갈떄만 스캔
         {
             //Debug.Log("falling");
-            Debug.DrawRay(_groundCheck.transform.position, Vector3.down, new Color(0, 1, 0));
-            RaycastHit2D rayHit = Physics2D.Raycast(_groundCheck.transform.position, Vector3.down, 1f, LayerMask.GetMask("Platform"));
+            Debug.DrawRay(_groundCheck.transform.position, Vector3.down, new Color(1, 0, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(_groundCheck.transform.position, Vector3.down, 11f, LayerMask.GetMask("Platform"));
             Debug.Log(rayHit.collider);
             if (rayHit.collider != null)
             {
-                if (rayHit.distance < 1.5)
+                if (rayHit.distance < 1)
                 {
                     isJumping = false;
                     _anim.SetBool("IsJump", false);
