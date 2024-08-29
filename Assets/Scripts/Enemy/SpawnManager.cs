@@ -37,6 +37,7 @@ public class SpawnManager : MonoBehaviour
         
         if(enemyType == EnemyTypes.RED) _enemy.sprite = _sprites[0];
         else if(enemyType == EnemyTypes.BLUE) _enemy.sprite = _sprites[1];
+        else if(enemyType == EnemyTypes.TRASH) _enemy.sprite = _sprites[2];
         _enemy.enemyType = enemyType;
         _enemy.spawnTime = spawnTime;
         _enemy.spawnSpeed = speed;
