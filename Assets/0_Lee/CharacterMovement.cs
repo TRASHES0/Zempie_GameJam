@@ -5,15 +5,21 @@ using System.Net.Mail;
 using UnityEngine;
 using Unity.VisualScripting;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.UI;
 
-  
 public class CharacterMovement : MonoBehaviour
 {
     private bool isJumping = false;
     private bool isSliding = false;
+    private bool isHit = false;
+    private bool isDead = false;
     private Animator _anim;
 
     public float jumpPower = 20;
+    private int HP = 3;
+    public GameObject[] HP_Image;
 
     private Rigidbody2D rigid;
 
@@ -37,47 +43,65 @@ public class CharacterMovement : MonoBehaviour
     
     void Update()
     {
-        //Jump
-        if (Input.GetKeyDown(KeyCode.Q) && !isJumping)
-        {
-            Running.enabled = true;
-            Sliding.enabled = false;
-            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            _anim.SetBool("IsJump", true);
-            isJumping = true;
-        }
-
-        if (Input.GetKey(KeyCode.W) && !isJumping && !isSliding)
-        {
-            Running.enabled = false;
-            Sliding.enabled = true;
-            isSliding = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.W) && isSliding)
-        {
-            Running.enabled = true;
-            Sliding.enabled = false;
-            isSliding = false;
-        }
         
-        // hit 
-        if(_enemiesinCollider.Any()){
-            if(Input.GetMouseButtonDown(1)) //오른쪽 마우스 버튼 입력
+        if(!isDead)
+        {
+            if (HP <= 0)
+                PlayerDead();
+
+            if (Input.GetKeyDown(KeyCode.Q) && !isJumping)
             {
-                if(_enemiesinCollider[0].enemyType == EnemyTypes.RED)
-                    Debug.Log(_enemiesinCollider[0].state);
-                else
-                    Debug.Log("Wrong One!");
-            Destroy(_enemiesinCollider[0].gameObject);
+                Running.enabled = true;
+                Sliding.enabled = false;
+                rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                _anim.SetBool("IsJump", true);
+                isJumping = true;
             }
-            else if(Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
+
+            if (Input.GetKey(KeyCode.W) && !isJumping && !isSliding)
             {
-                if(_enemiesinCollider[0].enemyType == EnemyTypes.BLUE)
-                    Debug.Log(_enemiesinCollider[0].state);
-                else
-                Debug.Log("Wrong One!");
-                Destroy(_enemiesinCollider[0].gameObject);
+                Running.enabled = false;
+                Sliding.enabled = true;
+                _anim.SetBool("IsSlide", true);
+                isSliding = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.W) && isSliding)
+            {
+                Running.enabled = true;
+                Sliding.enabled = false;
+                _anim.SetBool("IsSlide", false);
+                isSliding = false;
+            }
+
+            if (Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
+            {
+                _anim.SetTrigger("Attack1");
+            }
+            else if (Input.GetMouseButtonDown(1)) //오른쪽 마우스 버튼 입력
+            {
+                _anim.SetTrigger("Attack2");
+            }
+
+            // hit 
+            if (_enemiesinCollider.Any())
+            {
+                if (Input.GetMouseButtonDown(1)) //오른쪽 마우스 버튼 입력
+                {
+                    if (_enemiesinCollider[0].enemyType == EnemyTypes.RED)
+                        Debug.Log(_enemiesinCollider[0].state);
+                    else
+                        Debug.Log("Wrong One!");
+                    Destroy(_enemiesinCollider[0].gameObject);
+                }
+                else if (Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
+                {
+                    if (_enemiesinCollider[0].enemyType == EnemyTypes.BLUE)
+                        Debug.Log(_enemiesinCollider[0].state);
+                    else
+                        Debug.Log("Wrong One!");
+                    Destroy(_enemiesinCollider[0].gameObject);
+                }
             }
         }
         
@@ -100,5 +124,33 @@ public class CharacterMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void HitReaction()
+    {
+        if(!isHit && !isDead)
+        {
+            HitWait().Forget();
+            HP_Image[HP - 1].SetActive(false);
+            HP--;
+        }
+    }
+
+    async UniTask HitWait()
+    {
+        isHit = true;
+        await UniTask.Delay(TimeSpan.FromSeconds(2f));
+        isHit = false;
+    }
+
+    public void PlayerDead()
+    {
+        _anim.SetTrigger("Dead");
+    }
+
+    async UniTask DeadWait()
+    {
+        isDead = true;
+        await UniTask.Delay(TimeSpan.FromSeconds(2f));
     }
 }

@@ -58,3 +58,9 @@ TagManager:
   - name: Obstacle
     uniqueID: 3013683989
     locked: 0
+  - name: Player
+    uniqueID: 2395627337
+    locked: 0
+  - name: Truck
+    uniqueID: 2971570027
+    locked: 0
