@@ -47,7 +47,7 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         //Jump
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             //anim.SetBool("isjumping", true);

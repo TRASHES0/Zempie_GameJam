@@ -31,7 +31,7 @@ public class TimingManager : MonoBehaviour
         }
         else if (Note.CompareTag("Note") && Input.GetKeyDown(KeyCode.Space))
         {
-            state = Note.GetComponent<EnemyMovement>().state;
+            state = Note.GetComponent<Enemy>().state;
             Destroy(Note);
             Note = null;
             Debug.Log("Score :" + state);
