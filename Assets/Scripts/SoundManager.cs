@@ -81,7 +81,7 @@ public class SoundManager : MonoBehaviour
 
     public void EffectSoundPlay(int type)
     {
-        effectSound.volume = 0.7f;
+        effectSound.volume = 1f;
         effectSound.PlayOneShot(effectList[type]);
     }
 
