@@ -14,10 +14,9 @@ public class Enemy : MonoBehaviour
     public float CharX;
     public string state = "Miss";
     void Start(){
-
         _spriteRenderer.sprite = sprite;
 
-        transform.DOMoveX(CharX, spawnSpeed).SetEase(Ease.Linear);
+        transform.DOMoveX(CharX - 10f, spawnSpeed).SetEase(Ease.Linear).SetLink(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -35,7 +34,8 @@ public class Enemy : MonoBehaviour
         {
             state = "Bad";
         }
-        
+
+        other.GetComponentInParent<CharacterMovement>()._enemiesinCollider.Add(this);
     }
     
     private void OnTriggerExit2D(Collider2D other)
@@ -53,8 +53,10 @@ public class Enemy : MonoBehaviour
         else if (other.CompareTag("BadRect"))
         {
             state = "Miss";
+            Destroy(this);
         }
-        
+
+        other.GetComponentInParent<CharacterMovement>()._enemiesinCollider.Remove(this);
     }
 
 }

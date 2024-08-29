@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da202de4325ad0045951f43c8141ffec, type: 3}
   m_Name: EnemyData Data
   m_EditorClassIdentifier: 
-  Data: 'Blue,3.5,UP,1
+  Data: 'Blue,3.5,DOWN,0.6
 
-    Red,6,DOWN,0.5
+    Red,4,DOWN,0.7
 
-    Blue,7,UP,0.6
+    Blue,5,DOWN,0.8
 
-    Blue,8,UP,0.3
+    Blue,6,DOWN,1
 
-    Blue,10.2,DOWN,1
+    Blue,9.2,DOWN,1
 
-    Red,10.2,UP,1
+    Red,12.2,DOWN,0.4
 
-    Red,11.2,DOWN,1
+    Blue,13.2,DOWN,1
 
-    Blue,13.2,UP,1
+    Blue,13.8,DOWN,0.6
 
-    Blue,15.2,UP,1'
+    Red,14,DOWN,1'
