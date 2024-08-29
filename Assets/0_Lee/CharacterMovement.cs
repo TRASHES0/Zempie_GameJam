@@ -10,15 +10,21 @@ using System.Linq;
 public class CharacterMovement : MonoBehaviour
 {
     private bool isJumping = false;
+    private bool isSliding = false;
 
     public float jumpPower = 20;
 
     private Rigidbody2D rigid;
 
+    public Collider2D Running;
+    public Collider2D Sliding;
+    
     public List<Enemy> _enemiesinCollider;
     // Start is called before the first frame update
     void Start()
     {
+        Running.enabled = true;
+        Sliding.enabled = false;
         _enemiesinCollider = new List<Enemy>();
         rigid = GetComponent<Rigidbody2D>();
     }
@@ -33,6 +39,21 @@ public class CharacterMovement : MonoBehaviour
             isJumping = true;
         }
 
+        if (Input.GetKey(KeyCode.W) && !isJumping && !isSliding)
+        {
+            Running.enabled = false;
+            Sliding.enabled = true;
+            isSliding = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.W) && isSliding)
+        {
+            Running.enabled = true;
+            Sliding.enabled = false;
+            isSliding = false;
+        }
+        
+        // hit 
         if(_enemiesinCollider.Any()){
             if(Input.GetMouseButtonDown(1)) //오른쪽 마우스 버튼 입력
             {
