@@ -93,7 +93,11 @@ public class CharacterMovement : MonoBehaviour
                     else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
                         Debug.Log(_enemiesinCollider[0].state);
                     else
+                    {
                         Debug.Log("Wrong One!");
+                        HitReaction();
+                    }
+
                     Destroy(_enemiesinCollider[0].gameObject);
                 }
                 else if (Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
@@ -103,7 +107,11 @@ public class CharacterMovement : MonoBehaviour
                     else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
                         Debug.Log(_enemiesinCollider[0].state);
                     else
+                    {
                         Debug.Log("Wrong One!");
+                        HitReaction();
+                    }
+                        
 
 
                     Destroy(_enemiesinCollider[0].gameObject);
