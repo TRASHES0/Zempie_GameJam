@@ -23,11 +23,23 @@ public class Hit : MonoBehaviour
 
             cm.HitReaction();
         }
+
+        if (collision.CompareTag("ChaosGate"))
+        {
+            cm.Chaos = true;
+            Invoke("ChaosTimer",5);
+            
+        }
     }
 
     private void FallPlatform()
     {
         cm.PlayerDead();
+    }
+
+    void ChaosTimer()
+    {
+        cm.Chaos = false;
     }
 
 }

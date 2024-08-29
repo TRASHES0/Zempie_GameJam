@@ -15,6 +15,8 @@ public class CharacterMovement : MonoBehaviour
     private bool isSliding = false;
     private bool isHit = false;
     private bool isDead = false;
+
+    public bool Chaos = false;
     private Animator _anim;
 
     public float jumpPower = 20;
@@ -41,92 +43,7 @@ public class CharacterMovement : MonoBehaviour
         //TryGetComponent(out _groundCheck);
     }
     
-    void Update()
-    {
-        
-        if(!isDead)
-        {
-            if (HP <= 0)
-                PlayerDead();
-
-            if (Input.GetKeyDown(KeyCode.Q) && !isJumping)
-            {
-                Running.enabled = true;
-                Sliding.enabled = false;
-                rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                _anim.SetBool("IsJump", true);
-                SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Jump);
-                isJumping = true;
-            }
-
-            if (Input.GetKey(KeyCode.W) && !isJumping && !isSliding)
-            {
-                Running.enabled = false;
-                Sliding.enabled = true;
-                _anim.SetBool("IsSlide", true);
-                SoundManager.instance.SlideSound.Play();
-                isSliding = true;
-            }
-
-            if (Input.GetKeyUp(KeyCode.W) && isSliding)
-            {
-                Running.enabled = true;
-                Sliding.enabled = false;
-                _anim.SetBool("IsSlide", false);
-                SoundManager.instance.SlideSound.Stop();
-                isSliding = false;
-            }
-
-            // hit 
-            if (_enemiesinCollider.Any())
-            {
-                if (Input.GetMouseButtonDown(1)) //오른쪽 마우스 버튼 입력
-                {
-                    _anim.SetTrigger("Attack2");
-                    SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Attack2);
-                    if (_enemiesinCollider[0].enemyType == EnemyTypes.RED)
-                    {
-                        Debug.Log(_enemiesinCollider[0].state);
-                        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.RedNode);
-                    }
-                    else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
-                    {
-                        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
-                        Debug.Log(_enemiesinCollider[0].state);
-                    }
-                    else
-                    {
-                        Debug.Log("Wrong One!");
-                        HitReaction();
-                    }
-
-                    Destroy(_enemiesinCollider[0].gameObject);
-                }
-                else if (Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
-                {
-                    _anim.SetTrigger("Attack1");
-                    SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Attack1);
-                    if (_enemiesinCollider[0].enemyType == EnemyTypes.BLUE)
-                    {
-                        Debug.Log(_enemiesinCollider[0].state);
-                        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.BlueNode);
-                    }
-                    else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
-                    {
-                        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
-                        Debug.Log(_enemiesinCollider[0].state);
-                    }
-                    else
-                    {
-                        Debug.Log("Wrong One!");
-                        HitReaction();
-                    }
-                    Destroy(_enemiesinCollider[0].gameObject);
-                }
-            }
-        }
-        
-    }
+   
     void FixedUpdate()
     {
         //Landing Ploatform
@@ -175,5 +92,180 @@ public class CharacterMovement : MonoBehaviour
     {
         isDead = true;
         await UniTask.Delay(TimeSpan.FromSeconds(2f));
-    }
+    } 
+    void Update()
+         {
+             if (!Chaos) // 정상
+             {
+                 if (!isDead)
+                 {
+                     if (HP <= 0)
+                         PlayerDead();
+     
+                     if (Input.GetKeyDown(KeyCode.Q) && !isJumping)
+                     {
+                         Running.enabled = true;
+                         Sliding.enabled = false;
+                         rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                         _anim.SetBool("IsJump", true);
+                         SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Jump);
+                         isJumping = true;
+                     }
+     
+                     if (Input.GetKey(KeyCode.W) && !isJumping && !isSliding)
+                     {
+                         Running.enabled = false;
+                         Sliding.enabled = true;
+                         _anim.SetBool("IsSlide", true);
+                         SoundManager.instance.SlideSound.Play();
+                         isSliding = true;
+                     }
+     
+                     if (Input.GetKeyUp(KeyCode.W) && isSliding)
+                     {
+                         Running.enabled = true;
+                         Sliding.enabled = false;
+                         _anim.SetBool("IsSlide", false);
+                         SoundManager.instance.SlideSound.Stop();
+                         isSliding = false;
+                     }
+     
+                     // hit 
+                     if (_enemiesinCollider.Any())
+                     {
+                         if (Input.GetMouseButtonDown(1)) //오른쪽 마우스 버튼 입력
+                         {
+                             _anim.SetTrigger("Attack2");
+                             SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Attack2);
+                             if (_enemiesinCollider[0].enemyType == EnemyTypes.RED)
+                             {
+                                 Debug.Log(_enemiesinCollider[0].state);
+                                 SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.RedNode);
+                             }
+                             else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
+                             {
+                                 SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
+                                 Debug.Log(_enemiesinCollider[0].state);
+                             }
+                             else
+                             {
+                                 Debug.Log("Wrong One!");
+                                 HitReaction();
+                             }
+     
+                             Destroy(_enemiesinCollider[0].gameObject);
+                         }
+                         else if (Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
+                         {
+                             _anim.SetTrigger("Attack1");
+                             SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Attack1);
+                             if (_enemiesinCollider[0].enemyType == EnemyTypes.BLUE)
+                             {
+                                 Debug.Log(_enemiesinCollider[0].state);
+                                 SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.BlueNode);
+                             }
+                             else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
+                             {
+                                 SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
+                                 Debug.Log(_enemiesinCollider[0].state);
+                             }
+                             else
+                             {
+                                 Debug.Log("Wrong One!");
+                                 HitReaction();
+                             }
+     
+                             Destroy(_enemiesinCollider[0].gameObject);
+                         }
+                     }
+                 }
+             }
+             else //반전
+             {
+                 Debug.Log("hi");
+                 if (!isDead)
+                 {
+                     if (HP <= 0)
+                         PlayerDead();
+     
+                     if (Input.GetKeyDown(KeyCode.W) && !isJumping)
+                     {
+                         Running.enabled = true;
+                         Sliding.enabled = false;
+                         rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                         _anim.SetBool("IsJump", true);
+                         SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Jump);
+                         isJumping = true;
+                     }
+     
+                     if (Input.GetKey(KeyCode.Q) && !isJumping && !isSliding)
+                     {
+                         Running.enabled = false;
+                         Sliding.enabled = true;
+                         _anim.SetBool("IsSlide", true);
+                         SoundManager.instance.SlideSound.Play();
+                         isSliding = true;
+                     }
+     
+                     if (Input.GetKeyUp(KeyCode.Q) && isSliding)
+                     {
+                         Running.enabled = true;
+                         Sliding.enabled = false;
+                         _anim.SetBool("IsSlide", false);
+                         SoundManager.instance.SlideSound.Stop();
+                         isSliding = false;
+                     }
+     
+                     // hit 
+                     if (_enemiesinCollider.Any())
+                     {
+                         if (Input.GetMouseButtonDown(0)) //오른쪽 마우스 버튼 입력 반전
+                         {
+                             _anim.SetTrigger("Attack2");
+                             SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Attack2);
+                             if (_enemiesinCollider[0].enemyType == EnemyTypes.RED)
+                             {
+                                 Debug.Log(_enemiesinCollider[0].state);
+                                 SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.RedNode);
+                             }
+                             else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
+                             {
+                                 SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
+                                 Debug.Log(_enemiesinCollider[0].state);
+                             }
+                             else
+                             {
+                                 Debug.Log("Wrong One!");
+                                 HitReaction();
+                             }
+     
+                             Destroy(_enemiesinCollider[0].gameObject);
+                         }
+                         else if (Input.GetMouseButtonDown(1)) //왼쪽 마우스 버튼 입력 반전
+                         {
+                             _anim.SetTrigger("Attack1");
+                             SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Attack1);
+                             if (_enemiesinCollider[0].enemyType == EnemyTypes.BLUE)
+                             {
+                                 Debug.Log(_enemiesinCollider[0].state);
+                                 SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.BlueNode);
+                             }
+                             else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
+                             {
+                                 SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
+                                 Debug.Log(_enemiesinCollider[0].state);
+                             }
+                             else
+                             {
+                                 Debug.Log("Wrong One!");
+                                 HitReaction();
+                             }
+     
+                             Destroy(_enemiesinCollider[0].gameObject);
+                         }
+                     }
+                 }
+             }
+     
+         }
 }

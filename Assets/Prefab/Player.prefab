@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832cfaf64bb33fd41a7957be250a0e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Chaos: 0
   jumpPower: 11
   HP_Image:
   - {fileID: 5076787554962157613}

@@ -12,6 +12,7 @@ TagManager:
   - Floor
   - Obstacle
   - FallObstacle
+  - ChaosGate
   layers:
   - Default
   - TransparentFX
