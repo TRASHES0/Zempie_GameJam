@@ -133,8 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 347446068}
   - component: {fileID: 347446067}
+  - component: {fileID: 347446066}
   - component: {fileID: 347446069}
-  - component: {fileID: 347446070}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -142,6 +142,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &347446066
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347446065}
+  m_Enabled: 1
 --- !u!20 &347446067
 Camera:
   m_ObjectHideFlags: 0
@@ -212,19 +220,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &347446070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347446065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &409461421
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,9 +266,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409461421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.5, y: 3.01, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 9.5, y: 6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -266,11 +282,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 409461421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6695705062f0217409f7b78f94a55dbc, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ea02a48dd7ef904c98d6272a68813fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MonsterObj_Red: {fileID: 2076087575831041604, guid: 7db4aa0114c642f46a384f58183a22eb, type: 3}
-  _MonsterObj_Blue: {fileID: 2076087575831041604, guid: 7a455125f6aba9845b25cfb5ca5f3f2f, type: 3}
+  _MonsterObj_Red: {fileID: 4629484045424468158, guid: 34b40441ea26d9244b09a16a87c1a627, type: 3}
+  _MonsterObj_Blue: {fileID: 4629484045424468158, guid: 58e8df15078834c4f9aff7fad108c994, type: 3}
 --- !u!1 &773426994
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 773426996}
+  - component: {fileID: 773426995}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -287,6 +304,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &773426995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773426994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df671e1724897e246b2544910ff8cb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SpawnerUP: {fileID: 409461424}
+  _SpawnerDOWN: {fileID: 2002742534}
+  startTime: 0
+  currentTime: 0
 --- !u!4 &773426996
 Transform:
   m_ObjectHideFlags: 0
@@ -295,14 +328,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773426994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.45, y: 0.25886977, z: 0.06957713}
+  m_LocalPosition: {x: 0.39942133, y: 0.25886977, z: 0.06957713}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1129090754
+--- !u!1 &1362446139
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -310,69 +343,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1129090756}
-  - component: {fileID: 1129090755}
-  - component: {fileID: 1129090757}
+  - component: {fileID: 1362446141}
+  - component: {fileID: 1362446140}
   m_Layer: 0
-  m_Name: Collisom
+  m_Name: Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1129090755
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129090754}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!4 &1129090756
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129090754}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.31, y: 0.35014, z: 0}
-  m_LocalScale: {x: 1, y: 11.962501, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1129090757
+--- !u!114 &1362446140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129090754}
+  m_GameObject: {fileID: 1362446139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 685f76966c3c53e42bd25b800f9787ea, type: 3}
+  m_Script: {fileID: 11500000, guid: dde31375178a889428941f712372aec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpawnData: {fileID: 11400000, guid: dae881d5a41a1ec4c8aeeb7327228a38, type: 2}
+--- !u!4 &1362446141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362446139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.39942133, y: 0.25886977, z: 0.06957713}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002742532
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,9 +405,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002742532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.5, y: -3.27, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 9.5, y: -6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -414,8 +421,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2002742532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 885b03483c3b216438d5d2bb61d6f349, type: 3}
+  m_Script: {fileID: 11500000, guid: 48d16b6982595c340b528e912063a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MonsterObj_Red: {fileID: 2076087575831041604, guid: 7db4aa0114c642f46a384f58183a22eb, type: 3}
-  _MonsterObj_Blue: {fileID: 2076087575831041604, guid: 7a455125f6aba9845b25cfb5ca5f3f2f, type: 3}
+  _MonsterObj_Red: {fileID: 4629484045424468158, guid: 34b40441ea26d9244b09a16a87c1a627, type: 3}
+  _MonsterObj_Blue: {fileID: 4629484045424468158, guid: 58e8df15078834c4f9aff7fad108c994, type: 3}
