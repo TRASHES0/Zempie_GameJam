@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 7080869e505d3ea4f887f0793f2a9b5e, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &-221527447238966725
@@ -97,10 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0fb46c04a910c4aa7e10e5c8f2ac86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRed: {fileID: -9095717837082945937, guid: 75ef200772b9a8244a08fec846fc8017, type: 3}
-  _spriteBlue: {fileID: -9095717837082945937, guid: 7080869e505d3ea4f887f0793f2a9b5e, type: 3}
   _spriteRenderer: {fileID: 5387935161770358560}
+  sprite: {fileID: 0}
   enemyType: 0
   spawnTime: 0
-  Pos: 
   spawnSpeed: 0
+  CharX: 0
