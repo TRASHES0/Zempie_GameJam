@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using UnityEngine;
 using Unity.VisualScripting;
+using System.Linq;
 
 
 public class CharacterMovement : MonoBehaviour
@@ -13,9 +14,12 @@ public class CharacterMovement : MonoBehaviour
     public float jumpPower = 20;
 
     private Rigidbody2D rigid;
+
+    public List<Enemy> _enemiesinCollider;
     // Start is called before the first frame update
     void Start()
     {
+        _enemiesinCollider = new List<Enemy>();
         rigid = GetComponent<Rigidbody2D>();
     }
 /*
@@ -52,6 +56,26 @@ public class CharacterMovement : MonoBehaviour
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             //anim.SetBool("isjumping", true);
         }
+
+        if(_enemiesinCollider.Any()){
+            if(Input.GetMouseButtonDown(1)) //오른쪽 마우스 버튼 입력
+            {
+                if(_enemiesinCollider[0].enemyType == EnemyTypes.RED)
+                    Debug.Log(_enemiesinCollider[0].state);
+                else
+                    Debug.Log("Wrong One!");
+            Destroy(_enemiesinCollider[0].gameObject);
+            }
+            else if(Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
+            {
+                if(_enemiesinCollider[0].enemyType == EnemyTypes.BLUE)
+                    Debug.Log(_enemiesinCollider[0].state);
+                else
+                Debug.Log("Wrong One!");
+                Destroy(_enemiesinCollider[0].gameObject);
+            }
+        }
+        
     }
     void FixedUpdate()
     {
