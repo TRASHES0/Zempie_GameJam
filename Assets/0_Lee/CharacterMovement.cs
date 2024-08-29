@@ -18,39 +18,15 @@ public class CharacterMovement : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
     }
-/*
-    void OnJumpStart()
-    {
-        rigid.AddForce(new Vector2(0,13),ForceMode2D.Impulse);
-        
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Floor"))
-        {
-            isJumping = false;
-        }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q) && !isJumping)
-        {
-            isJumping = true;
-            OnJumpStart();
-        }
-        Debug.Log(isJumping);
-    }*/
-    
     
     void Update()
     {
         //Jump
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !isJumping)
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             //anim.SetBool("isjumping", true);
+            isJumping = true;
         }
     }
     void FixedUpdate()
@@ -58,12 +34,15 @@ public class CharacterMovement : MonoBehaviour
         //Landing Ploatform
         if(rigid.velocity.y < 0) //내려갈떄만 스캔
         {
+            Debug.Log("falling");
             Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
-            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
+            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 15, LayerMask.GetMask("Platform"));
+            Debug.Log(rayHit.collider);
             if (rayHit.collider != null)
             {
-                if (rayHit.distance < 0.5f)
+                if (rayHit.distance < 1.5)
                 {
+                    isJumping = false;
                     //anim.SetBool("isjumping", false);
                 }
             }
