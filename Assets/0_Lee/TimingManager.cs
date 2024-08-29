@@ -6,37 +6,35 @@ using UnityEngine;
 
 public class TimingManager : MonoBehaviour
 {
-    public List<GameObject> boxNoteList = new List<GameObject>();
-
-    [SerializeField] Transform Center = null;
-    [SerializeField] Collider2D[]  timingRect = null;
-    Vector2[] timingBoxs = null;
+    private GameObject Note = null;
     private string state;
-    
-    // Start is called before the first frame update
-    void Start()
+    private bool isTriggered = false;
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        isTriggered = true;
+        Note = other.GameObject();
+       //Debug.Log(state);
+    }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        isTriggered = false;
+        Note = null;
+        //Debug.Log(state);
     }
 
-    
-    // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    void CheckTiming()
-    {
-        for (int i = 0; i < timingRect.Length; i++)
+        if (Note == null)
         {
             
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-       state = other.GetComponent<EnemyMovement>().state;
-       Debug.Log(state);
+        else if (Note.CompareTag("Note") && Input.GetKeyDown(KeyCode.Space))
+        {
+            state = Note.GetComponent<EnemyMovement>().state;
+            Destroy(Note);
+            Note = null;
+            Debug.Log("Score :" + state);
+        }
     }
 }
