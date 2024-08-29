@@ -24,13 +24,20 @@ public class MonsterSpawnManagerUP : MonoBehaviour
     async void SpawnMonster(int spawn_num, int delay_time, Types type){
         if(type == Types.Red)
             for(int i = 0; i < spawn_num; ++i){
-                Instantiate(_MonsterObj_Red, transform.position, transform.rotation);
+                Instantiate(_MonsterObj_Red, transform.position, transform.rotation).GetComponent<EnemyMovement>()._targetpos = new Vector2(0f, 3f);
                 await UniTask.Delay(delay_time);
             }
         else if(type == Types.Blue)
             for(int i = 0; i < spawn_num; ++i){
-                Instantiate(_MonsterObj_Blue, transform.position, transform.rotation);
+                Instantiate(_MonsterObj_Blue, transform.position, transform.rotation).GetComponent<EnemyMovement>()._targetpos = new Vector2(0f, 3f);
                 await UniTask.Delay(delay_time);
             }
+    }
+
+        void Update(){
+        if(Input.GetKeyDown(KeyCode.Q))
+            SpawnMonster(1, 0, Types.Red);
+        if(Input.GetKeyDown(KeyCode.E))
+            SpawnMonster(1, 0, Types.Blue);
     }
 }
