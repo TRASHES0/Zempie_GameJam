@@ -14,8 +14,8 @@ public class SpawnManager : MonoBehaviour
     private Transform _spawnerDOWN;
     [SerializeField]
     private Transform _char;
-    private float _startTime;
-    public float currentTime;
+    [SerializeField]
+    private Sprite[] _sprites;
     private Enemy _enemy;
     public EnemyData enemyData;
     private System.Diagnostics.Stopwatch w;
@@ -29,11 +29,14 @@ public class SpawnManager : MonoBehaviour
 
     async void SpawnEnemy(string Pos, EnemyTypes enemyType, float spawnTime, float speed){
         await UniTask.Delay(Mathf.FloorToInt(spawnTime * 1000f));
+
         if(Pos == "UP")
             _enemy = Instantiate(_enemyObj, _spawnerUP.position, _spawnerUP.rotation).GetComponent<Enemy>();
         else if(Pos == "DOWN")
             _enemy = Instantiate(_enemyObj, _spawnerDOWN.position, _spawnerDOWN.rotation).GetComponent<Enemy>();
-
+        
+        if(enemyType == EnemyTypes.RED) _enemy.sprite = _sprites[0];
+        else if(enemyType == EnemyTypes.BLUE) _enemy.sprite = _sprites[1];
         _enemy.enemyType = enemyType;
         _enemy.spawnTime = spawnTime;
         _enemy.spawnSpeed = speed;

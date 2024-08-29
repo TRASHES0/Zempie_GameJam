@@ -305,7 +305,9 @@ MonoBehaviour:
   _spawnerUP: {fileID: 409461423}
   _spawnerDOWN: {fileID: 2002742533}
   _char: {fileID: 1882586424}
-  currentTime: 0
+  _sprites:
+  - {fileID: -9095717837082945937, guid: 75ef200772b9a8244a08fec846fc8017, type: 3}
+  - {fileID: -9095717837082945937, guid: 7080869e505d3ea4f887f0793f2a9b5e, type: 3}
   enemyData: {fileID: 0}
 --- !u!4 &773426996
 Transform:
