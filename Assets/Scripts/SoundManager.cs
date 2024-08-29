@@ -10,14 +10,25 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource bgSound;
     public AudioSource effectSound;
+    public AudioSource SlideSound;
     public AudioClip[] bgList;
     public AudioClip[] effectList;
     public enum EffectType
     {
-        ButtonClick,
-        EnemyHit,
-        Throw,
-        Die
+        Button,
+        Attack1,
+        Attack2,
+        Bad,
+        BlueNode,
+        RedNode,
+        EnemyBlueNode,
+        EnemyRedNode,
+        Trash,
+        Hit,
+        Jump,
+        Slide,
+        Dead,
+        KeyWarp
     };
 
     private void Awake()

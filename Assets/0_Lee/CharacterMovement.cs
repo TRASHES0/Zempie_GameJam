@@ -55,6 +55,7 @@ public class CharacterMovement : MonoBehaviour
                 Sliding.enabled = false;
                 rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 _anim.SetBool("IsJump", true);
+                SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Jump);
                 isJumping = true;
             }
 
@@ -63,6 +64,7 @@ public class CharacterMovement : MonoBehaviour
                 Running.enabled = false;
                 Sliding.enabled = true;
                 _anim.SetBool("IsSlide", true);
+                SoundManager.instance.SlideSound.Play();
                 isSliding = true;
             }
 
@@ -71,16 +73,8 @@ public class CharacterMovement : MonoBehaviour
                 Running.enabled = true;
                 Sliding.enabled = false;
                 _anim.SetBool("IsSlide", false);
+                SoundManager.instance.SlideSound.Stop();
                 isSliding = false;
-            }
-
-            if (Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
-            {
-                _anim.SetTrigger("Attack1");
-            }
-            else if (Input.GetMouseButtonDown(1)) //오른쪽 마우스 버튼 입력
-            {
-                _anim.SetTrigger("Attack2");
             }
 
             // hit 
@@ -88,10 +82,18 @@ public class CharacterMovement : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(1)) //오른쪽 마우스 버튼 입력
                 {
+                    _anim.SetTrigger("Attack2");
+                    SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Attack2);
                     if (_enemiesinCollider[0].enemyType == EnemyTypes.RED)
+                    {
                         Debug.Log(_enemiesinCollider[0].state);
+                        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.RedNode);
+                    }
                     else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
+                    {
+                        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
                         Debug.Log(_enemiesinCollider[0].state);
+                    }
                     else
                     {
                         Debug.Log("Wrong One!");
@@ -102,20 +104,24 @@ public class CharacterMovement : MonoBehaviour
                 }
                 else if (Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
                 {
+                    _anim.SetTrigger("Attack1");
+                    SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Attack1);
                     if (_enemiesinCollider[0].enemyType == EnemyTypes.BLUE)
+                    {
                         Debug.Log(_enemiesinCollider[0].state);
+                        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.BlueNode);
+                    }
                     else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
+                    {
+                        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
                         Debug.Log(_enemiesinCollider[0].state);
+                    }
                     else
                     {
                         Debug.Log("Wrong One!");
                         HitReaction();
                     }
-                        
-
-
                     Destroy(_enemiesinCollider[0].gameObject);
-
                 }
             }
         }
@@ -146,6 +152,7 @@ public class CharacterMovement : MonoBehaviour
         if(!isHit && !isDead)
         {
             HitWait().Forget();
+            SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Hit);
             HP_Image[HP - 1].SetActive(false);
             HP--;
         }
@@ -161,6 +168,7 @@ public class CharacterMovement : MonoBehaviour
     public void PlayerDead()
     {
         _anim.SetTrigger("Dead");
+        SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Hit);
     }
 
     async UniTask DeadWait()

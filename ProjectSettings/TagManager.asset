@@ -64,6 +64,12 @@ TagManager:
   - name: Truck
     uniqueID: 2971570027
     locked: 0
+  - name: Monster
+    uniqueID: 1622114801
+    locked: 0
+  - name: Node
+    uniqueID: 290259275
+    locked: 0
   - name: UI
     uniqueID: 2859323681
     locked: 0
