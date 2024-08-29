@@ -34,6 +34,8 @@ public class CharacterMovement : MonoBehaviour
         //Jump
         if (Input.GetKeyDown(KeyCode.Q) && !isJumping)
         {
+            Running.enabled = true;
+            Sliding.enabled = false;
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             //anim.SetBool("isjumping", true);
             isJumping = true;
