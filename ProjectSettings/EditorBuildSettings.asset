@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Rain_GameScene.unity
     guid: 1e27e5dd29f273b40968a9597a49af11
   - enabled: 1
+    path: Assets/Scenes/DeadScene.unity
+    guid: 158c92d6333168843a451810921d32bf
+  - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: f9658e8bafecf42479166d425d714522
   m_configObjects: {}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2993621418291709087}
   - component: {fileID: 7426848648899521182}
-  - component: {fileID: 1485844997482352346}
+  - component: {fileID: 4939601414403374151}
   m_Layer: 0
   m_Name: ManHole
   m_TagString: FallObstacle
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1485844997482352346
+--- !u!61 &4939601414403374151
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3735119, y: -0.25750303}
+  m_Offset: {x: -0.6629424, y: 0.012053013}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -109,5 +109,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.641585, y: 1.2796888}
+  m_Size: {x: 4.2741146, y: 1.6284361}
   m_EdgeRadius: 0

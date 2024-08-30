@@ -16,6 +16,7 @@ public class EnemyHit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.name);
         if(collision.CompareTag("Obstacle"))
         {
             p_anim.SetTrigger("Hit");
@@ -25,6 +26,7 @@ public class EnemyHit : MonoBehaviour
         }
         else if(collision.CompareTag("FallObstacle"))
         {
+            Debug.Log("Hi");
             p_anim.SetTrigger("Hit");
             a_anim.SetTrigger("Hit");
             collision.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
