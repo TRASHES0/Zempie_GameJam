@@ -26,9 +26,10 @@ public class Hit : MonoBehaviour
 
         if (collision.CompareTag("ChaosGate"))
         {
-            cm.Chaos = true;
+            cm.Chaos = !cm.Chaos;
+            CmStateReset();
             SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.KeyWarp);
-            Invoke("ChaosTimer",10);
+            //Invoke("ChaosTimer",10);
             
         }
     }
@@ -38,9 +39,12 @@ public class Hit : MonoBehaviour
         cm.PlayerDead();
     }
 
-    void ChaosTimer()
+    void CmStateReset()
     {
-        cm.Chaos = false;
+        cm.isJumping = false;
+        cm.isSliding = false;
+        cm._anim.SetBool("IsJump", false);
+        cm._anim.SetBool("IsSlide", false);
     }
 
 }

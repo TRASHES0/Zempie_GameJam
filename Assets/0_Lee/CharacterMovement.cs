@@ -11,14 +11,14 @@ using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
-    private bool isJumping = false;
-    private bool isSliding = false;
+    public bool isJumping = false;
+    public bool isSliding = false;
     private bool isHit = false;
     private bool isDead = false;
 
     public Text text;
     public bool Chaos = false;
-    private Animator _anim;
+    public Animator _anim;
 
     public float jumpPower = 20;
     private int HP = 3;
