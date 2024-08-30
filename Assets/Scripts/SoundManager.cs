@@ -63,6 +63,7 @@ public class SoundManager : MonoBehaviour
         }
         else if (arg0.name == "DeadScene")
         {
+            bgSound.Stop();
             SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Dead);
         }
         else if (arg0.name == "EndScene")

@@ -27,7 +27,8 @@ public class Hit : MonoBehaviour
         if (collision.CompareTag("ChaosGate"))
         {
             cm.Chaos = true;
-            Invoke("ChaosTimer",5);
+            SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.KeyWarp);
+            Invoke("ChaosTimer",10);
             
         }
     }

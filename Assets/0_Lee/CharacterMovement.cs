@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
     private bool isHit = false;
     private bool isDead = false;
 
+    public Text text;
     public bool Chaos = false;
     private Animator _anim;
 
@@ -68,6 +70,7 @@ public class CharacterMovement : MonoBehaviour
         if(!isHit && !isDead)
         {
             HitWait().Forget();
+            DamageEffect().Forget();
             SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Hit);
             HP_Image[HP - 1].SetActive(false);
             HP--;
@@ -83,14 +86,16 @@ public class CharacterMovement : MonoBehaviour
 
     public void PlayerDead()
     {
-        _anim.SetTrigger("Dead");
+        isDead = true;
         SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Hit);
+        DeadWait().Forget();
     }
 
     async UniTask DeadWait()
     {
-        isDead = true;
-        await UniTask.Delay(TimeSpan.FromSeconds(2f));
+        _anim.SetTrigger("Dead");
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        SceneManager.LoadScene("DeadScene");
     } 
     void Update()
          {
@@ -140,18 +145,21 @@ public class CharacterMovement : MonoBehaviour
                              {
                                  Debug.Log(_enemiesinCollider[0].state);
                                  SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.RedNode);
+                            text.text = _enemiesinCollider[0].state;
                              }
                              else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
                              {
                                  SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
                                  Debug.Log(_enemiesinCollider[0].state);
-                             }
+                            text.text = _enemiesinCollider[0].state;
+                        }
                              else
                              {
                                  Debug.Log("Wrong One!");
                                  HitReaction();
-                             }
-     
+                            text.text = "BAD...";
+                        }
+
                              Destroy(_enemiesinCollider[0].gameObject);
                          }
                          else if (Input.GetMouseButtonDown(0)) //왼쪽 마우스 버튼 입력
@@ -162,20 +170,22 @@ public class CharacterMovement : MonoBehaviour
                              {
                                  Debug.Log(_enemiesinCollider[0].state);
                                  SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.BlueNode);
-                             }
+                            text.text = _enemiesinCollider[0].state;
+                        }
                              else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
                              {
                                  SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
                                  Debug.Log(_enemiesinCollider[0].state);
-                             }
+                            text.text = _enemiesinCollider[0].state;
+                        }
                              else
                              {
                                  Debug.Log("Wrong One!");
-                                 HitReaction();
+                            text.text = "BAD...";
+                            HitReaction();
                              }
-     
-                             Destroy(_enemiesinCollider[0].gameObject);
-                         }
+                        Destroy(_enemiesinCollider[0].gameObject);
+                    }
                      }
                  }
              }
@@ -226,16 +236,20 @@ public class CharacterMovement : MonoBehaviour
                              {
                                  Debug.Log(_enemiesinCollider[0].state);
                                  SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.RedNode);
-                             }
+                            text.text = _enemiesinCollider[0].state;
+                        }
                              else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
-                             {
-                                 SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
-                                 Debug.Log(_enemiesinCollider[0].state);
-                             }
+                            {
+                                SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
+
+                                Debug.Log(_enemiesinCollider[0].state);
+                                text.text = _enemiesinCollider[0].state;
+                            }
                              else
                              {
                                  Debug.Log("Wrong One!");
-                                 HitReaction();
+                            text.text = "BAD...";
+                            HitReaction();
                              }
      
                              Destroy(_enemiesinCollider[0].gameObject);
@@ -248,17 +262,20 @@ public class CharacterMovement : MonoBehaviour
                              {
                                  Debug.Log(_enemiesinCollider[0].state);
                                  SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.BlueNode);
-                             }
+                            text.text = _enemiesinCollider[0].state;
+                        }
                              else if (_enemiesinCollider[0].enemyType == EnemyTypes.TRASH)
                              {
                                  SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Trash);
                                  Debug.Log(_enemiesinCollider[0].state);
-                             }
+                            text.text = _enemiesinCollider[0].state;
+                        }
                              else
                              {
                                  Debug.Log("Wrong One!");
                                  HitReaction();
-                             }
+                            text.text = "BAD...";
+                        }
      
                              Destroy(_enemiesinCollider[0].gameObject);
                          }
@@ -268,22 +285,11 @@ public class CharacterMovement : MonoBehaviour
      
          }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    async UniTask DamageEffect()
     {
-        if (collision.CompareTag("ChaosGate"))
-        {
-            StartCoroutine(DamageEffect());
-        }
-    }
-
-    IEnumerator DamageEffect()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            GetComponent<SpriteRenderer>().color = Color.red;
-            yield return new WaitForSeconds(0.2f);
-            GetComponent<SpriteRenderer>().color = Color.white;
-            yield return new WaitForSeconds(0.2f);
-        }
+        GetComponent<SpriteRenderer>().color = Color.red;
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        GetComponent<SpriteRenderer>().color = Color.white;
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
     }
 }

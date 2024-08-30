@@ -13,6 +13,7 @@ TagManager:
   - Obstacle
   - FallObstacle
   - ChaosGate
+  - BGM
   layers:
   - Default
   - TransparentFX

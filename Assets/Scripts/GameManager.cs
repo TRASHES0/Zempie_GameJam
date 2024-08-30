@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 using System.Threading;
 using Cysharp.Threading.Tasks.CompilerServices;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,11 @@ public class GameManager : MonoBehaviour
     void Start(){
         //TimeScaleChange(_cancellationTokenSource.Token, 시작시간, 지연시간, timeScale, 지속시간).Forget();
         //밀리세컨드 단위로 입력
-        TimeScaleChange(_cancellationTokenSource.Token, 0, 2000, 1.5f, 1000).Forget();
+        _audioSource = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
+        if(SceneManager.GetActiveScene().name == "Sun_GameScene")
+            TimeScaleChange(_cancellationTokenSource.Token, 10000 , 5000, 0.5f, 10000).Forget();
+        else
+            TimeScaleChange(_cancellationTokenSource.Token, 0, 20000, 1.5f, 5000).Forget();
     }
 
     async UniTaskVoid TimeScaleChange(CancellationToken cancellationToken, int startTime, int delayTime, float timeScale, int duration)

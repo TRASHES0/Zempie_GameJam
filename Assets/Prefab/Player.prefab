@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832cfaf64bb33fd41a7957be250a0e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 2252394396431219703}
   Chaos: 0
   jumpPower: 11
   HP_Image:
@@ -1110,6 +1111,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1de8f8bee50a85428fedbbae95d98a8, type: 3}
+--- !u!114 &2252394396431219703 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6161690786787541401, guid: c1de8f8bee50a85428fedbbae95d98a8, type: 3}
+  m_PrefabInstance: {fileID: 5386487514202126958}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3862204555238816840 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9176624437930198566, guid: c1de8f8bee50a85428fedbbae95d98a8, type: 3}
