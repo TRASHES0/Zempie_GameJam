@@ -267,4 +267,23 @@ public class CharacterMovement : MonoBehaviour
              }
      
          }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("ChaosGate"))
+        {
+            StartCoroutine(DamageEffect());
+        }
+    }
+
+    IEnumerator DamageEffect()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
+            yield return new WaitForSeconds(0.2f);
+            GetComponent<SpriteRenderer>().color = Color.white;
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
 }
