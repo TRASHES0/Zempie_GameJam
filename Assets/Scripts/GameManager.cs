@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private AudioSource _audioSource;
     private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
+
+    public float t;
     private void Awake()
     {
         if (instance == null)
@@ -37,19 +39,19 @@ public class GameManager : MonoBehaviour
         //밀리세컨드 단위로 입력
 
         if(arg0.name == "Sun_GameScene")
-            TimeScaleChange(_cancellationTokenSource.Token, 10000 , 1000, 0.5f, 10000).Forget();
+            TimeScaleChange(_cancellationTokenSource.Token, 10 , 1, 0.5f, 10).Forget();
         else if (arg0.name == "Rain_GameScene")
-            TimeScaleChange(_cancellationTokenSource.Token, 0, 10000, 1.5f, 10000).Forget();
+            TimeScaleChange(_cancellationTokenSource.Token, 0, 10, 1.5f, 10).Forget();
     }
 
     async UniTaskVoid TimeScaleChange(CancellationToken cancellationToken, int startTime, int delayTime, float timeScale, int duration)
     {
-        float t = 0f;
+        t = 0f;
         float ts = Time.timeScale;
         float p = _audioSource.pitch;
         while (true)
         {
-            if (t == startTime + delayTime + duration)
+            if (t > startTime + delayTime + duration)
             {
                 Time.timeScale = 1f;
                 _audioSource.pitch = 1f;
@@ -57,14 +59,14 @@ public class GameManager : MonoBehaviour
             }
             if (cancellationToken.IsCancellationRequested) break;
 
-            t += 1;
+            t += Time.deltaTime;
             if(t >= startTime && (t - startTime) <= delayTime)
             {
                 Time.timeScale = Mathf.Lerp(ts, timeScale, (t - startTime) / delayTime);
                 _audioSource.pitch = Mathf.Lerp(p, timeScale, (t - startTime) / delayTime);
             }
             
-            await UniTask.Delay(1, true, cancellationToken: cancellationToken);
+            await UniTask.Delay(0, cancellationToken: cancellationToken);
         }
     }
 
