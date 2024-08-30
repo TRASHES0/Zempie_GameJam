@@ -58,15 +58,16 @@ public class SoundManager : MonoBehaviour
         }
         else if (arg0.name == "Rain_GameScene")
         {
+            SoundManager.instance.SlideSound.Stop();
             BgSoundPlay(bgList[2]);
         }
         else if (arg0.name == "DeadScene")
         {
-            //BgSoundPlay(bgList[3]);
             SoundManager.instance.EffectSoundPlay((int)SoundManager.EffectType.Dead);
         }
         else if (arg0.name == "EndScene")
         {
+            SoundManager.instance.SlideSound.Stop();
             BgSoundPlay(bgList[0]);
         }
     }

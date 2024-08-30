@@ -3,36 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Rendering.Universal;
+using System.Threading;
+using Cysharp.Threading.Tasks.CompilerServices;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private Light2D _light; 
-    
-
+    private AudioSource _audioSource;
+    private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
     void Start(){
-
-        //MkTimeSlowFast(변경시간, 지속시간, 타임스케일)
+        //TimeScaleChange(_cancellationTokenSource.Token, 시간,timeScale, 지속시간).Forget();
         //밀리세컨드 단위로 입력
-        MkTimeSlowFast(2000, 5000, 0.75f); 
-
-
+        TimeScaleChange(_cancellationTokenSource.Token, 2000, 1.5f, 1000).Forget();
     }
 
-    async void MkTimeSlowFast(int delayTime, int duration, float timeScale){
-        await UniTask.WaitUntil(DelayCompleted);
-        Time.timeScale = timeScale;
-        _light.intensity = 2f;
-        _light.color = Color.yellow;
-        await UniTask.Delay(duration, true);
-        Time.timeScale = 1f;
-        _light.intensity = 1f;
+    async UniTaskVoid TimeScaleChange(CancellationToken cancellationToken, int delayTime, float timeScale, int duration)
+    {
+        float t = 0f;
+        float ts = Time.timeScale;
+        float p = _audioSource.pitch;
+        while (true)
+        {
+            if (t == delayTime + duration)
+            {
+                Time.timeScale = 1f;
+                _audioSource.pitch = 1f;
+                _cancellationTokenSource.Cancel();
+            }
+            if (cancellationToken.IsCancellationRequested) break;
+
+            t += 1;
+            if(t <= delayTime)
+            {
+                Time.timeScale = Mathf.Lerp(ts, timeScale, t / delayTime);
+                _audioSource.pitch = Mathf.Lerp(p, timeScale, t / delayTime);
+            }
+            
+            await UniTask.Delay(1, true, cancellationToken: cancellationToken);
+        }
     }
 
-    bool DelayCompleted(){
-        
-        return true;
+    private void OnDestroy()
+    {
+        _cancellationTokenSource.Cancel();
     }
-
-
 }

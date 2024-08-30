@@ -382,7 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   End_pos: {fileID: 3074485124875726172}
   Start_pos: {fileID: 8261894022816064178}
-  speed: 80
+  speed: 40
 --- !u!95 &1555818153026682380
 Animator:
   serializedVersion: 5
