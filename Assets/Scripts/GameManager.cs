@@ -10,17 +10,36 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     [SerializeField]
     private AudioSource _audioSource;
     private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-    void Start(){
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
         //TimeScaleChange(_cancellationTokenSource.Token, 시작시간, 지연시간, timeScale, 지속시간).Forget();
         //밀리세컨드 단위로 입력
-        _audioSource = GameObject.FindGameObjectWithTag("BGM").GetComponent<AudioSource>();
-        if(SceneManager.GetActiveScene().name == "Sun_GameScene")
-            TimeScaleChange(_cancellationTokenSource.Token, 10000 , 5000, 0.5f, 10000).Forget();
-        else
-            TimeScaleChange(_cancellationTokenSource.Token, 0, 20000, 1.5f, 5000).Forget();
+
+        if(arg0.name == "Sun_GameScene")
+            TimeScaleChange(_cancellationTokenSource.Token, 10000 , 1000, 0.5f, 10000).Forget();
+        else if (arg0.name == "Rain_GameScene")
+            TimeScaleChange(_cancellationTokenSource.Token, 0, 10000, 1.5f, 10000).Forget();
     }
 
     async UniTaskVoid TimeScaleChange(CancellationToken cancellationToken, int startTime, int delayTime, float timeScale, int duration)
