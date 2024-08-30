@@ -39,9 +39,9 @@ public class GameManager : MonoBehaviour
         //밀리세컨드 단위로 입력
 
         if(arg0.name == "Sun_GameScene")
-            TimeScaleChange(_cancellationTokenSource.Token, 10 , 1, 0.5f, 10).Forget();
+            TimeScaleChange(_cancellationTokenSource.Token, 10 , 20, 0.5f, 5).Forget();
         else if (arg0.name == "Rain_GameScene")
-            TimeScaleChange(_cancellationTokenSource.Token, 0, 10, 1.5f, 10).Forget();
+            TimeScaleChange(_cancellationTokenSource.Token, 0, 20, 2f, 10).Forget();
     }
 
     async UniTaskVoid TimeScaleChange(CancellationToken cancellationToken, int startTime, int delayTime, float timeScale, int duration)
